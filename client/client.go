@@ -200,6 +200,11 @@ type ExtraInfo struct {
 	//
 	// https://xxx
 	OriginalVideoUrl *string `json:"original_video_url,omitempty" xml:"original_video_url,omitempty"`
+	// 原厂响应体快照
+	// example:
+	//
+	// "{"task_id":"csg-xxx-xx"...}"
+	OriginalResponseSnapshot *string `json:"original_response_snapshot,omitempty" xml:"original_response_snapshot,omitempty"`
 }
 
 func (s ExtraInfo) String() string {
@@ -217,6 +222,11 @@ func (s *ExtraInfo) SetOriginalTaskId(v string) *ExtraInfo {
 
 func (s *ExtraInfo) SetOriginalVideoUrl(v string) *ExtraInfo {
 	s.OriginalVideoUrl = &v
+	return s
+}
+
+func (s *ExtraInfo) SetOriginalResponseSnapshot(v string) *ExtraInfo {
+	s.OriginalResponseSnapshot = &v
 	return s
 }
 
@@ -874,7 +884,7 @@ func (client *Client) DoRequest(version *string, action *string, protocol *strin
 				"req_msg_id":       antchainutil.GetNonce(),
 				"access_key":       client.AccessKeyId,
 				"base_sdk_version": tea.String("TeaSDK-2.0"),
-				"sdk_version":      tea.String("1.0.6"),
+				"sdk_version":      tea.String("1.0.7"),
 				"_prod_code":       tea.String("CREATIVE"),
 				"_prod_channel":    tea.String("default"),
 			}
